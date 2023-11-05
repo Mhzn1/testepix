@@ -373,15 +373,14 @@ function App() {
         </div>
         <div className="input-container">
           <label htmlFor="infoAdicional">Descrição</label>
-          
           <textarea
             id="infoAdicional"
             placeholder="Descrição/Informação Adicional (140 caracteres)"
             value={infoAdicional}
-            style={{ height: '150px', width: '825px', resize: 'none' }}
+            style={{ resize: 'both' }}
             onChange={(e) => setInfoAdicional(e.target.value)}
-            className="custom-input"
-          />
+            className="custom-input resizable-textarea"
+          ></textarea>
           {showAlert && (
           <div className="alert-overlay">
             <div className="alert alert-danger" role="alert">
