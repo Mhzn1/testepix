@@ -739,7 +739,7 @@ select option[value=""] {
   width: 400px;
   position: fixed;
   top: 10%; 
-  right: 4%; 
+  right: 5%; 
   height: 75%; 
   background-color: rgb(255, 255, 255); 
   overflow-y: auto; 
