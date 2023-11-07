@@ -6,10 +6,6 @@ import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
-
 function HistoryItem({ historyData, handleOpenDetails }) {
   return (
     <div className="history-item">
@@ -49,7 +45,6 @@ function QRCodeCustom({ value, size, borderColor }) {
     height: size,
     border: `3px solid ${borderColor}`, // Define a cor da borda aqui
   };
-
   return (
     <div style={qrCodeStyle}>
       <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${value}&size=${size}x${size}`} alt="QR Code" />
@@ -111,12 +106,10 @@ function App() {
   };
 
 
-
   const handleChavesClick = () => {
     setShowRecentChaves(true);
   };
   
-
   const handleShowPopup = (message) => {
     setPopupMessage(message);
     setShowPopup(true);
