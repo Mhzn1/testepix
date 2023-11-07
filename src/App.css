@@ -10,7 +10,16 @@
   font-size: 12px; /* Altere o tamanho da fonte conforme desejado */
   text-align: center;
 }
-
+#copyQRCodeButton {
+  background-color: #FF0000; /* Vermelho */
+  color: #FFFFFF; /* Texto branco */
+  padding: 10px 20px; /* Espaçamento interno */
+  border: none; /* Sem borda */
+  border-radius: 5px; /* Cantos arredondados */
+  cursor: pointer; /* Ícone de cursor de mão ao passar o mouse */
+  font-size: 12px; /* Tamanho da fonte */
+  margin-top: 10px;
+}
 .input-file-label {
   display: inline-block;
   padding: 10px 20px;
