@@ -129,9 +129,6 @@ function App() {
     }, 3000);
   };
 
-  const closeNotification = () => {
-    setShowNotification(false);
-  };
   
 
   const handleNomeRecebedorChange = (e) => {
