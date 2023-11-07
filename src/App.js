@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import QRCode from 'qrcode.react';
 import { createStaticPix } from 'pix-utils';
 import './App.css';
 import Modal from 'react-modal';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 
 function HistoryItem({ historyData, handleOpenDetails }) {
@@ -53,6 +58,7 @@ function QRCodeCustom({ value, size, borderColor }) {
 }
 
 
+
 function App() {
   const [chavePix, setChavePix] = useState('');
   const [nomeRecebedor, setNomeRecebedor] = useState('');
@@ -84,6 +90,32 @@ function App() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [cidadeRecebedorError, setCidadeRecebedorError] = useState(null);
+  const [lastGeneratedBRCode, setLastGeneratedBRCode] = useState(null);
+  const [recentChaves, setRecentChaves] = useState([]);
+  const [showRecentChaves, setShowRecentChaves] = useState(false);
+  
+
+  const handleChavePixChange = (event) => {
+    const newChavePix = event.target.value;
+    validateChavePix(newChavePix);
+    setChavePix(newChavePix);
+    setRecentChaves((prevChaves) => {
+      const updatedChaves = [newChavePix, ...prevChaves];
+      return updatedChaves.slice(0, 5);
+    });
+  };
+
+  const handleSelectChave = (selectedChave) => {
+    setChavePix(selectedChave);
+    // Outras ações que você deseja executar quando uma chave é selecionada.
+  };
+
+
+
+  const handleChavesClick = () => {
+    setShowRecentChaves(true);
+  };
+  
 
   const handleShowPopup = (message) => {
     setPopupMessage(message);
@@ -112,11 +144,6 @@ function App() {
     } else {
       setNomeRecebedorError('Apenas letras');
     }
-  };
-  const handleChavePixChange = (e) => {
-    const newChavePix = e.target.value;
-    validateChavePix(newChavePix);
-    setChavePix(newChavePix);
   };
   const openModal = () => {
     setIsModalOpen(true);
@@ -239,14 +266,13 @@ function App() {
       setValorTransacao(0);
     }
   }
-
+  
   // Função para gerar um QR Code e salvar no histórico
   const handleGerarQRCode = () => {
-    if (!chavePix || !nomeRecebedor || !cidadeRecebedor || valorTransacao <= 0) {
-      setAlertMessage(
-        <span className="red-text">Preencha todos os campos corretamente antes de gerar o QR Code.</span>
-      );
-      setShowAlert(true);
+    if (!chavePix || !nomeRecebedor || !cidadeRecebedor) {
+      toast.error("Preencha todos os campos corretamente antes de gerar o QR Code", {
+        autoClose: 1000, // Define o tempo de fechamento automático em milissegundos (3 segundos neste exemplo)
+      });
       return;
     }
   
@@ -258,11 +284,17 @@ function App() {
       transactionAmount: parseFloat(valorTransacao) / 100,
       logoImage,
     };
-  
     const pix = createStaticPix(elements);
     const brCode = pix.toBRCode();
   
-    // Atualiza o histórico e salva no localStorage
+    setLastGeneratedBRCode(brCode);
+
+    const handleGenerateQRCode = () => {
+      // Simulação da criação de um QR Code
+      const qrCodeValue = 'QR Code gerado aqui';
+      setQRCode(qrCodeValue);
+    };
+
     const newHistoricoQRCode = [
       {
         merchantName: nomeRecebedor,
@@ -284,7 +316,34 @@ function App() {
     setShowAlert(false);
   };
   
+  
+  const qrCodeRef = useRef(null);
+  
+  const handleCopyQRCode = () => {
+    if (qrCodeRef.current) {
+      const qrCodeValue = qrCodeRef.current.value;
+      copyToClipboard(qrCodeValue);
+    }
+  };
 
+  const copyToClipboard = (text) => {
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = text;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextArea);
+  
+    toast.info(
+      <div>
+        <strong>QR Code copiado para a área de transferência!</strong>
+      </div>,
+      {
+        position: 'top-right',
+        autoClose: 1000,
+      }
+    );
+  };
 
   const handleLimparDados = () => {
     setChavePix('');
@@ -294,8 +353,8 @@ function App() {
     setValorTransacao(0);
     setInfoAdicional('');
     setShowQRCode(false);
-    setLogoImage(null); // Remova a imagem
-    setQRCode(''); // Limpe o QR Code
+    setLogoImage(null);
+    setQRCode('');
   };
 
   return (
@@ -310,8 +369,8 @@ function App() {
         <div className="input-row">
           <div className="input-column">
             <div className="input-container">
-              <label htmlFor="chavePix">Chave Pix</label>
-              <input
+            <label htmlFor="chavePix">Chave Pix</label>
+            <input
                 type="text"
                 id="chavePix"
                 placeholder="Digite sua Chave Pix*"
@@ -367,8 +426,10 @@ function App() {
                 value={formatCurrency(valorTransacao)}
                 onChange={handleValorTransacaoChange}
                 className="custom-input"
+                required={false}
               />
             </div>
+
           </div>
         </div>
         <div className="input-container">
@@ -381,6 +442,7 @@ function App() {
             onChange={(e) => setInfoAdicional(e.target.value)}
             className="custom-input resizable-textarea"
           ></textarea>
+
           {showAlert && (
           <div className="alert-overlay">
             <div className="alert alert-danger" role="alert">
@@ -429,7 +491,18 @@ function App() {
         {showHistory ? (
             <>
               <h2 style={{ textAlign: 'center' }}>QR Codes Salvos:</h2>
-
+              <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  className="toast-container"
+                />
               <div className="select-container">
                 <div className="qr-codes-history">
                   {historicoQRCode.slice(0, 5).map((item, index) => (
@@ -465,22 +538,23 @@ function App() {
                     <h1>Dados do QR code</h1>
                     {selectedQRCodeDetails && (
                       <>
+                        <>
                         <p><strong>Nome do Recebedor:</strong> {selectedQRCodeDetails.merchantName}</p>
-                <p><strong>Chave Pix:</strong> {selectedQRCodeDetails.pixKey}</p>
-                <p><strong>Cidade do Recebedor:</strong> {selectedQRCodeDetails.merchantCity}</p>
-                <p><strong>Valor da Transação:</strong> R$ {(parseFloat(selectedQRCodeDetails.transactionAmount) / 100).toFixed(2)}</p>
-                <p><strong>Descrição:</strong> {selectedQRCodeDetails.infoAdicional}</p>
-
-                <div className="qr-code-box">
-                  <QRCode value={selectedQRCodeDetails.brCode} />
-                </div>
-              </>
-            )}
-            <button onClick={closeModal} className="close-button">
-              Fechar Detalhes
-            </button>
-          </div>
-        </Modal>
+                        <p><strong>Chave Pix:</strong> {selectedQRCodeDetails.pixKey}</p>
+                        <p><strong>Cidade do Recebedor:</strong> {selectedQRCodeDetails.merchantCity}</p>
+                        <p><strong>Valor da Transação:</strong> R$ {(parseFloat(selectedQRCodeDetails.transactionAmount) / 100).toFixed(2)}</p>
+                        <p><strong>Descrição:</strong> {selectedQRCodeDetails.infoAdicional}</p>
+                        <div className="qr-code-box">
+                          <QRCode value={selectedQRCodeDetails.brCode} />
+                        </div>
+                      </> 
+                      </>
+                    )}
+                      <button onClick={closeModal} className="close-button">
+                      Fechar Detalhes
+                    </button>
+                  </div>
+                </Modal>
                     </div>
                   ))}
                 </div>
@@ -500,7 +574,30 @@ function App() {
                 <QRCode value={qrCode} size={qrCodeSize} bgColor={bgColor} fgColor={fgColor} />
                 {logoImage && <img src={logoImage} alt="Logo" className="logoImage" style={{ width: '40px', height: '40px' }} />}
               </div>
-
+              <input
+                type="text"
+                value={qrCode}
+                ref={qrCodeRef}
+                style={{ display: 'none' }}
+                readOnly
+              />
+              <button id="copyQRCodeButton" onClick={handleCopyQRCode}>
+                Copiar QR Code
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  className="toast-container"
+                />
+              </button>
+              <div>                           
+              </div>  
               <div className="color-options">
                 <label htmlFor="bgColor">Cor de Fundo:</label>
                 <input type="color" id="bgColor" value={bgColor} onChange={handleBgColorChange} />
