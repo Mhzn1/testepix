@@ -2,7 +2,7 @@
   width: 420px;
   height: 5%;
   position: fixed;
-  top: 87.9%;
+  top: 87%;
   left: 69.5%;
   transform: translateY(-50%);
   background-color: #ffffff;
@@ -765,7 +765,7 @@ select option[value=""] {
   position: fixed;
   top: 9.6%; 
   right: 5%; 
-  height: 74%; 
+  height: 76%; 
   border: 1px solid #ccc;
   background-color: rgb(255, 255, 255); 
   overflow-y: auto; 
