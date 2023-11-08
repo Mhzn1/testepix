@@ -1,9 +1,9 @@
 .side-menu {
-  width: 420px;
+  width: 28%;
   height: 5%;
   position: fixed;
-  top: 87%;
-  left: 69.3%;
+  top: 86.9%;
+  left: 68.9%;
   transform: translateY(-50%);
   background-color: #ffffff;
   border-radius: 15px;
@@ -635,8 +635,8 @@ select option[value=""] {
   border: 1px solid #ccc;
   border-radius: 20px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  max-width: 900px; 
-  max-height: 1100px; 
+  max-width: 80%; 
+  max-height: 90%; 
   margin: 4%;
   margin-top: 3%;
   position: fixed;
@@ -760,12 +760,12 @@ select option[value=""] {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px;
-  width: 400px;
+  padding: 1%;
+  width: 26%;
   position: fixed;
-  top: 6.5%; 
+  top: 6.6%; 
   right: 5%; 
-  height: 74.6%; 
+  height: 72%; 
   border: 1px solid #ccc;
   background-color: rgb(255, 255, 255); 
   overflow-y: auto; 
