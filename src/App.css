@@ -1,3 +1,9 @@
+@media (min-width: 1920px) {
+  body {
+    zoom: 125%;
+  }
+}
+
 .side-menu {
   width: 28%;
   height: 5%;
