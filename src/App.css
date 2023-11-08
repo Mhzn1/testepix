@@ -1,25 +1,41 @@
+.side-menu {
+  width: 420px;
+  height: 5%;
+  position: fixed;
+  top: 89.9%;
+  left: 69.5%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.icon {
+  font-size: 22px;
+  color: rgb(0, 0, 0);
+  margin: 10px 0; 
+  cursor: pointer; 
+}
+.side-menu .icon {
+  margin-right: 20px;
+}
 
 .Toastify__progress-bar {
-  background-color: #FF0000 !important; /* Altere para a cor desejada, use !important para garantir que a regra seja aplicada */
-}
+  background-color: #FF0000 !important;
 .Toastify__progress-bar-icon {
-  color: #FF0000 !important; /* Cor vermelha */
+  color: #FF0000 !important;
 }
 
 .toast-container {
-  font-size: 12px; /* Altere o tamanho da fonte conforme desejado */
+  font-size: 12px; 
   text-align: center;
 }
-#copyQRCodeButton {
-  background-color: #FF0000; /* Vermelho */
-  color: #FFFFFF; /* Texto branco */
-  padding: 10px 20px; /* Espaçamento interno */
-  border: none; /* Sem borda */
-  border-radius: 5px; /* Cantos arredondados */
-  cursor: pointer; /* Ícone de cursor de mão ao passar o mouse */
-  font-size: 12px; /* Tamanho da fonte */
-  margin-top: 10px;
-}
+
 .input-file-label {
   display: inline-block;
   padding: 10px 20px;
@@ -34,11 +50,16 @@
   font-weight: bold;
 }
 
-/* Estilo para o botão ao passar o mouse */
-#copyQRCodeButton:hover {
-  background-color: #FF3333; /* Vermelho mais escuro quando hover */
+#copyQRCodeButton {
+  background-color: #FF0000;
+  color: #FFFFFF; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 12px;
+  margin-top: 10px;
 }
-
 
 .body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1600' height='350' preserveAspectRatio='none' viewBox='0 0 1600 350'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1000%26quot%3b)' fill='none'%3e%3crect width='1600' height='350' x='0' y='0' fill='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c117 C 106.8%2c106.6 320.4%2c63 534%2c65 C 747.6%2c67 854.8%2c139.2 1068%2c127 C 1281.2%2c114.8 1493.6%2c28.6 1600%2c4L1600 350L0 350z' fill='rgba(117%2c 9%2c 9%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c205 C 106.8%2c220.6 320.4%2c286.8 534%2c283 C 747.6%2c279.2 854.8%2c182.6 1068%2c186 C 1281.2%2c189.4 1493.6%2c277.2 1600%2c300L1600 350L0 350z' fill='rgba(255%2c 0%2c 0%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1000'%3e%3crect width='1600' height='350' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
@@ -49,7 +70,7 @@
   font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative; /* Adicione esta linha para garantir que o plano de fundo fique fixo */
+  position: relative;
 }
 .input-file-label:hover {
   background-color: #fa0000;
@@ -67,26 +88,10 @@
   color: red;
   font-size: 12px;
 }
-.alert-overlay {
-  position: fixed;
-  top: 75%;
-  left: 0px;
-  right: 450px;
-  text-align: center;
-}
-
-.alert-overlay {
-display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-
 
 .custom-file-label {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 50px;
   background-color: #ff0000;
   color: rgb(255, 255, 255);
   border: none;
@@ -94,6 +99,7 @@ display: flex;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top:20px;
+  margin-left: 18px;
 }
 .custom-file-label:hover {
   background-color: #ff0000;
@@ -110,18 +116,16 @@ display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid #ff0000;
   margin: 0px;
   width: 320px;
   padding: 10px;
-  border-radius: 10px;
   text-align: left;
   font-size: 12px;
   height: 50px;
   margin-bottom: 10px;
-}
-.qr-code-item:hover {
-  background-color: #ff000011;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(to right, transparent,#fe000086, transparent) 1;
+  border-image-slice: 1;
 }
 
 .qr-code-item button {
@@ -145,7 +149,7 @@ display: flex;
 
 
 .qr-code-item button:hover {
-  background-color: #FF5555;
+  background-color: #ff0000;
 }
 
 
@@ -176,8 +180,6 @@ display: flex;
 input[type="color"] {
   width: 100px; 
 }
-
-
 
 .color-button {
   text-align: center;
@@ -261,8 +263,6 @@ input[type="color"] {
   margin-top: 10px;
 }
 
-
-
 .color-button {
   background-color: transparent;
   color: red; 
@@ -331,7 +331,7 @@ input[type="color"] {
   margin-left: 40px;
   height: 470px;
   margin-right: -27px;
-  background-color: red;
+  background-color: rgb(0, 255, 60);
 }
 .button-container {
   display: flex;
@@ -427,7 +427,7 @@ select option[value=""] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 60px 10px 10px; /* Define a margem apenas à direita para empurrar os elementos para a esquerda */
+    margin: 10px 60px 10px 10px;
   }
   .custom-modal .close-button {
     background-color: #ff1100; 
@@ -477,8 +477,8 @@ select option[value=""] {
   .resizable-textarea {
     resize: both;
     overflow: auto;
-    max-height: 150px; /* Define a altura máxima do textarea */
-    width: 350px; /* Define a largura desejada */
+    max-height: 150px; 
+    width: 350px;
   }
   
   .toggle-button {
@@ -502,9 +502,6 @@ select option[value=""] {
     height: 600px; 
     overflow-y: auto;
   }
-  .selected-history {
-    background-color: green;
-  }
   .logoImage {
     position: absolute;
     top: 270px;
@@ -513,7 +510,7 @@ select option[value=""] {
     }
   
   .input-row > * {
-    margin: 0; /* Reduz a margem horizontal entre os elementos */
+    margin: 0;
   }
   .color-options {
     display: flex;
@@ -546,7 +543,7 @@ select option[value=""] {
     margin-top: 50px;
     right: 5px;
     border-radius: 10px;
-    max-width: 400px; /* Delimite o final da página em 1000px */
+    max-width: 400px;
   }
   
 }
@@ -555,23 +552,23 @@ select option[value=""] {
     background-color: transparent;
     color: #000000;
     border: 2px solid #ff0000;
-    border-radius: 5px;
+    border-radius: 9px;
     cursor: pointer;
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 10px 40px;
     margin-right: 10px;
     transition: background-color 0.3s;
-  }
+}
   .resizable-textarea {
     resize: both;
     overflow: auto;
-    max-height: 100px; /* Define a altura máxima do textarea */
-    width: 800px; /* Define a largura desejada */
+    max-height: 100px;
+    width: 800px; 
   }
   body {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1600' height='350' preserveAspectRatio='none' viewBox='0 0 1600 350'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1000%26quot%3b)' fill='none'%3e%3crect width='1600' height='350' x='0' y='0' fill='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c117 C 106.8%2c106.6 320.4%2c63 534%2c65 C 747.6%2c67 854.8%2c139.2 1068%2c127 C 1281.2%2c114.8 1493.6%2c28.6 1600%2c4L1600 350L0 350z' fill='rgba(117%2c 9%2c 9%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c205 C 106.8%2c220.6 320.4%2c286.8 534%2c283 C 747.6%2c279.2 854.8%2c182.6 1068%2c186 C 1281.2%2c189.4 1493.6%2c277.2 1600%2c300L1600 350L0 350z' fill='rgba(255%2c 0%2c 0%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1000'%3e%3crect width='1600' height='350' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: center bottom; /* Mantém a imagem de fundo na borda inferior */
+    background-position: center bottom; 
     background-attachment: fixed;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -766,13 +763,15 @@ select option[value=""] {
   padding: 10px;
   width: 400px;
   position: fixed;
-  top: 10%; 
+  top: 6.6%; 
   right: 5%; 
-  height: 75%; 
+  height: 77%; 
+  border: 1px solid #ccc;
   background-color: rgb(255, 255, 255); 
   overflow-y: auto; 
   border-radius: 20px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
 }
 
 
