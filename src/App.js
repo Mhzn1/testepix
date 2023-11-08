@@ -258,6 +258,14 @@ function App() {
       copyToClipboard(qrCodeValue);
     }
   };
+
+  const handleChange = (e) => {
+    const text = e.target.value;
+    
+    if (text.length <= 140) {
+      setInfoAdicional(text);
+    }
+  };
   
 
   const copyToClipboard = (text) => {
@@ -364,16 +372,16 @@ function App() {
             </div>
           </div>
           <div className="input-container">
-        <label htmlFor="infoAdicional">Descrição</label>
-        <textarea
+          <label htmlFor="infoAdicional">Descrição</label>
+          <textarea
           id="infoAdicional"
           placeholder="Descrição/Informação Adicional (140 caracteres)"
           value={infoAdicional}
           style={{ resize: 'both' }}
           onChange={(e) => setInfoAdicional(e.target.value)}
           className="custom-input resizable-textarea"
+          maxLength="140"
         ></textarea>
-
         {showAlert && (
           <div className="alert-overlay">
             <div className="alert alert-danger" role="alert">
