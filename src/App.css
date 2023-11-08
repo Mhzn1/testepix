@@ -27,9 +27,9 @@
 
 .Toastify__progress-bar {
   background-color: #FF0000 !important;
-.Toastify__progress-bar-icon {
-  color: #FF0000 !important;
 }
+
+
 
 .toast-container {
   font-size: 12px; 
