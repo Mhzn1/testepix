@@ -197,6 +197,7 @@ input[type="color"] {
   padding: 10px 15px; 
   position: relative;
   border: none;
+  width: 850px;
   border-radius: 15px;
   margin-bottom: 5px;
   text-align: left;
